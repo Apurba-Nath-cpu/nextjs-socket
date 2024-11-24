@@ -1,4 +1,3 @@
-import { log } from "console";
 import { useEffect, useState, FC, ChangeEvent, KeyboardEvent } from "react";
 import io, { Socket } from "socket.io-client";
 
@@ -42,12 +41,6 @@ const Chat: FC = () => {
             socket.disconnect();
         };
     }, [userName, messages]);
-
-    const getCurrTime = () => {
-        const currentDate = new Date();
-        const readableTime = currentDate.toString();
-        return readableTime;
-    }
 
     const sendMessage = (): void => {
         if (message.trim() === "") return; // Prevent sending empty messages
