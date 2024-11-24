@@ -7,6 +7,8 @@ const Chat: FC = () => {
     const [message, setMessage] = useState<string>("");
     const [messages, setMessages] = useState<Array<[string, string, string]>>([]);
     const [userName, setuserName] = useState<string>("Unknown");
+    type MessagePayload = [string, string, string]; // [message, sender, timestamp]
+
 
     useEffect(() => {
         const hasPrompted = localStorage.getItem("userName");
@@ -32,7 +34,7 @@ const Chat: FC = () => {
 
         socket = io();
 
-        socket.on("message", (payload) => {
+        socket.on("message", (payload: MessagePayload) => {
             console.log("payload: ", payload);
             setMessages((prevMessages) => [[payload[0], payload[1], payload[2]], ...prevMessages]);
         });
